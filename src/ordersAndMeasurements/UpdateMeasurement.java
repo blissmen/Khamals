@@ -52,7 +52,7 @@ public class UpdateMeasurement extends javax.swing.JFrame {
         System.out.println("Loading old measurements now");
         String query;
         System.out.println(customer);
-        if(customer.getValue()!=null){
+        if(customer!=null){
             query = "select burst, waist, hips, sleeve, back, arm, chest, length, band from measurements where"
                 + " customer_id = " + customer.getValue().toString();
         System.out.println(query + "\n");
@@ -466,6 +466,8 @@ public class UpdateMeasurement extends javax.swing.JFrame {
     }//GEN-LAST:event_customerCmBoxActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
         this.loadOldMeasurements();
     }//GEN-LAST:event_formWindowOpened
 

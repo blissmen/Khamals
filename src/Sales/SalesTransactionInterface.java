@@ -5,12 +5,10 @@
 package Sales;
 
 
-import Database.DatabaseHelper;
 import User.Users;
+import Database.DatabaseHelper;
 import java.awt.print.PrinterException;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -38,17 +36,11 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
         initComponents();
         
         
-           try {
-               //Automatically fiil the transaction id, and cahsier's name
-               
-               //Connect to the database
-
-               transacetionGeneralDta = new DatabaseHelper();
-           } catch (SQLException ex) {
-               Logger.getLogger(SalesTransactionInterface.class.getName()).log(Level.SEVERE, null, ex);
-           }
+        //Automatically fiil the transaction id, and cahsier's name
+        
+        //Connect to the database
         try{
-       
+        transacetionGeneralDta = new DatabaseHelper();
         transacetionGeneralDta.setQuery("Select MAX(TRANSACTION_ID) from SALES_GENERAL");
                 
         //Set the current TRANSACTION_ID, which is the last TRANSACTION_ID + 1
@@ -57,8 +49,8 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
            
                            
         //Get and set cashier name
-        cashier_nameField.setText(Users.getName());
-            System.out.println("Hey:"+Users.getName());
+      cashier_nameField.setText(Users.getName());
+
         }catch(SQLException e){
             e.printStackTrace();
         }
@@ -178,6 +170,8 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
             }
         });
 
+        dateChooserCombo1.setFormat(0);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -192,13 +186,13 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
                             .addComponent(jButton3)
-                            .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel5)
                                     .addComponent(jLabel4))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 79, Short.MAX_VALUE))
+                    .addComponent(dateChooserCombo1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -218,9 +212,9 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
                 .addComponent(cashier_nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(dateChooserCombo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton3))
         );
 
@@ -326,7 +320,7 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -544,7 +538,7 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
            //Get data to insert into thte database
            int transactionId = new Integer(transaction_idFied.getText()).intValue();
            String customerName ="";
-           String cashierName  = Users.getName();
+           String cashierName  = cashier_nameField.getText();
 
            
            //Ensure valid date by getting and recalculating the total from the discount
@@ -805,7 +799,8 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
         //1) Make the table empty
           for (int i = 0; i < jTable1.getRowCount(); i++) {
                  for (int j = 0; j < jTable1.getColumnCount(); j++) {
-                     jTable1.setValueAt(null, i, j);
+                     jTable1.setValueAt("", i, j);
+                     
                  }
                  
              }
@@ -855,7 +850,7 @@ public class SalesTransactionInterface extends javax.swing.JPanel {
         this.updateUI();
     }//GEN-LAST:event_formFocusLost
 
-    Sales.ProductsForSales p = new Sales.ProductsForSales();
+    inventorymangementsystem.ProductsForSales p = new inventorymangementsystem.ProductsForSales();
     public static int myEditingRow; //
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private static javax.swing.JTextField amountToBePaidField;

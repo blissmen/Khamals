@@ -67,6 +67,8 @@ public class ViewMeasurement extends javax.swing.JFrame {
         ComboItem customer = (ComboItem) this.customerCmBox.getSelectedItem();
         System.out.println("Trying to load values");
         String query;
+        if(customer!=null)
+        {
         query = "select burst, waist, hips, sleeve, back, arm, chest, length, band from measurements where"
                 + " customer_id = " + customer.getValue().toString();
          try{
@@ -86,7 +88,7 @@ public class ViewMeasurement extends javax.swing.JFrame {
                     Logger.getLogger(NewMeasurement.class.getName()).log(Level.SEVERE, null, ex);
             }        
     }
-    
+    }
     //small function to make all the entry fields uneditable so they servel more like labels
     //using this instead of labels so to make us of the background
     public void makeFieldsUneditable(){

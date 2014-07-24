@@ -5,7 +5,6 @@
  */
 package Database;
 
-import CustomersDebtors.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -44,6 +43,7 @@ public class DatabaseHelper {
         connectedToDatabase = true;
     }
 
+ 
     public final void setQuery(String query)
             throws SQLException, IllegalStateException {
         // ensure database connection is available
@@ -290,7 +290,7 @@ public class DatabaseHelper {
                     + ")";
 
             statement.execute(query);
-                statement.execute(query);
+            
             
                 String  query2= "CREATE TABLE KHAMALS.CUSTOMERS ("
                         + "FIRST_NAME VARCHAR(45) NOT NULL,"
@@ -352,6 +352,7 @@ public class DatabaseHelper {
                     + ")";
 
             statement.execute(query);
+            
 
             query = "CREATE TABLE KHAMALS.SALES_GENERAL ("
                     + "	TRANSACTION_ID INTEGER NOT NULL,"

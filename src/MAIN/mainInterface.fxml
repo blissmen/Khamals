@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="mainAchorPane" prefHeight="721.0" prefWidth="1120.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="khamals.mainInterfaceController">
+<AnchorPane id="AnchorPane" fx:id="mainAchorPane" prefHeight="721.0" prefWidth="1120.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MAIN.MainInterfaceController">
    <children>
       <TabPane layoutY="-6.0" prefHeight="721.0" prefWidth="1120.0" stylesheets="@customeStyleSheet.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
@@ -22,7 +22,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@customeStyleSheet.css">
                                  <children>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="135.0" stylesheets="@customeStyleSheet.css" text="Manage passwords" textAlignment="CENTER">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="30.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#loadUserPwd" prefHeight="76.0" prefWidth="135.0" stylesheets="@customeStyleSheet.css" text="Manage passwords" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -39,7 +39,7 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="296.0" layoutY="13.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="90.0" stylesheets="@customeStyleSheet.css" text="Remove user">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="296.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#loadUserDelete" prefHeight="79.0" prefWidth="90.0" stylesheets="@customeStyleSheet.css" text="Remove user">
                                        <graphic>
                                           <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -83,9 +83,9 @@
                                                          </font>
                                                       </Text>
                                                       <Button id="shiny-orange" layoutX="22.0" layoutY="51.0" mnemonicParsing="false" onMouseClicked="#loadMakeSales" prefHeight="40.0" prefWidth="171.0" stylesheets="@customeStyleSheet.css" text="Make sale" />
-                                                      <Button id="shiny-orange" layoutX="25.0" layoutY="104.0" mnemonicParsing="false" onMouseDragged="#addNewOrder" prefHeight="40.0" prefWidth="169.0" stylesheets="@customeStyleSheet.css" text="Place order" />
+                                                      <Button id="shiny-orange" layoutX="25.0" layoutY="104.0" mnemonicParsing="false" onMouseClicked="#addNewOrder" onMouseDragged="#addNewOrder" prefHeight="40.0" prefWidth="169.0" stylesheets="@customeStyleSheet.css" text="Place order" />
                                                       <Button id="shiny-orange" layoutX="23.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#loadReport" prefHeight="40.0" prefWidth="174.0" stylesheets="@customeStyleSheet.css" text="Generate report" />
-                                                      <Button id="shiny-orange" layoutX="21.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#loadCustomers2" prefHeight="40.0" prefWidth="174.0" stylesheets="@customeStyleSheet.css" text="Manage customers" />
+                                                      <Button id="shiny-orange" layoutX="21.0" layoutY="212.0" mnemonicParsing="false" onMouseClicked="#loadMCustmer" prefHeight="40.0" prefWidth="174.0" stylesheets="@customeStyleSheet.css" text="Manage customers" />
                                                       <Rectangle arcHeight="5.0" arcWidth="5.0" height="33.0" layoutX="14.0" layoutY="292.0" stroke="BLACK" strokeType="INSIDE" width="200.0">
                                                          <fill>
                                                             <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
@@ -103,12 +103,12 @@
                                                       </Text>
                                                       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="40.0" layoutY="340.0" pickOnBounds="true" preserveRatio="true">
                                                          <image>
-                                                            <Image url="@../../images/khamals.png" />
+                                                            <Image url="@../khamals/images/khamals.png" />
                                                          </image>
                                                       </ImageView>
                                                    </children>
                                                 </AnchorPane>
-                                              <AnchorPane id="background" minHeight="0.0" minWidth="0.0" onMouseClicked="#loadCustomers" prefHeight="160.0" prefWidth="100.0" stylesheets="@customeStyleSheet.css">
+                                              <AnchorPane id="background" minHeight="0.0" minWidth="0.0" onMouseClicked="#viewOrderHistoryActionPerformed" prefHeight="160.0" prefWidth="100.0" stylesheets="@customeStyleSheet.css">
                                                    <children>
                                                       <Button fx:id="loadImagesBtn" contentDisplay="TOP" layoutX="747.0" layoutY="14.0" mnemonicParsing="false" onAction="#selectImages" text="Load Designs Folder ">
                                                          <graphic>
@@ -124,10 +124,17 @@
                                                          <font>
                                                             <Font size="52.0" />
                                                          </font>
+                                                         <contextMenu>
+                                                            <ContextMenu>
+                                                              <items>
+                                                                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                                              </items>
+                                                            </ContextMenu>
+                                                         </contextMenu>
                                                       </Button>
                                                       <Button id="bevel-grey" contentDisplay="CENTER" layoutX="248.0" layoutY="146.0" mnemonicParsing="false" onMouseClicked="#viewOrderHistoryActionPerformed" prefHeight="86.0" prefWidth="178.0" stylesheets="@customeStyleSheet.css" text="Orders" textFill="#680909">
                                                          <graphic>
-                                                            <ImageView fitHeight="84.0" fitWidth="112.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fitHeight="84.0" fitWidth="112.0" onMouseClicked="#viewOrderHistoryActionPerformed" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../khamals/images/re.jpg" />
                                                                </image>
@@ -220,7 +227,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@customeStyleSheet.css">
                                  <children>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="104.0" stylesheets="@customeStyleSheet.css" text="View Inventory" textAlignment="CENTER">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loadInventory" prefHeight="76.0" prefWidth="104.0" stylesheets="@customeStyleSheet.css" text="View Inventory" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="47.0" fitWidth="47.0" onMouseClicked="#loadInventory" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -232,7 +239,7 @@
                                           <Font name="System Bold" size="12.0" />
                                        </font>
                                     </Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="138.0" layoutY="16.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="80.0" stylesheets="@customeStyleSheet.css" text="Add item">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="138.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#loadInventory" prefHeight="69.0" prefWidth="80.0" stylesheets="@customeStyleSheet.css" text="Add item">
                                        <graphic>
                                           <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -243,7 +250,7 @@
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font></Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="243.0" layoutY="18.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="97.0" stylesheets="@customeStyleSheet.css" text="Remove Item">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="243.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#loadInventory" prefHeight="70.0" prefWidth="97.0" stylesheets="@customeStyleSheet.css" text="Remove Item">
                                        <graphic>
                                           <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -274,7 +281,7 @@
                   </AnchorPane>
               </content>
           </Tab>
-            <Tab id="normal-tab" onSelectionChanged="#loadOrderHistory" text="Orders">
+            <Tab id="normal-tab" text="Orders">
             <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -342,7 +349,7 @@
                   </AnchorPane>
             </content>
             </Tab>
-            <Tab id="normal-tab" fx:id="measurementsTab" onSelectionChanged="#loadCustomers" text="Measurements">
+            <Tab id="normal-tab" fx:id="measurementsTab" text="Measurements">
             <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -350,16 +357,16 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@customeStyleSheet.css">
                                  <children>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadMeasurements" prefHeight="76.0" prefWidth="146.0" stylesheets="@customeStyleSheet.css" text="View old Measurement">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loadMeasurements" prefHeight="76.0" prefWidth="146.0" stylesheets="@customeStyleSheet.css" text="View old Measurement">
                                        <graphic>
-                                          <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="47.0" fitWidth="47.0" onMouseClicked="#loadMeasurements1" pickOnBounds="true" preserveRatio="true">
                                              <image>
                                                 <Image url="@../khamals/images/search1.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="207.0" layoutY="18.0" mnemonicParsing="false" onAction="#newMeasurement" prefHeight="69.0" prefWidth="147.0" stylesheets="@customeStyleSheet.css" text="Add New Measurement" wrapText="true">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="207.0" layoutY="18.0" mnemonicParsing="false" onAction="#newMeasurement" onMouseClicked="#newMeasurement" prefHeight="69.0" prefWidth="147.0" stylesheets="@customeStyleSheet.css" text="Add New Measurement" wrapText="true">
                                        <graphic>
                                           <ImageView fitHeight="41.0" fitWidth="55.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -367,7 +374,7 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="392.0" layoutY="19.0" mnemonicParsing="false" onAction="#updateMeasurement" prefHeight="68.0" prefWidth="134.0" stylesheets="@customeStyleSheet.css" text="Update Measurement">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="392.0" layoutY="19.0" mnemonicParsing="false" onAction="#updateMeasurement" onMouseClicked="#updateMeasurement" prefHeight="68.0" prefWidth="134.0" stylesheets="@customeStyleSheet.css" text="Update Measurement">
                                        <graphic>
                                           <ImageView fitHeight="40.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -406,7 +413,7 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@customeStyleSheet.css">
                                  <children>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="105.0" stylesheets="@customeStyleSheet.css" text="Manage Users" textAlignment="CENTER">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loadUserPwd" prefHeight="76.0" prefWidth="105.0" stylesheets="@customeStyleSheet.css" text="Manage Users" textAlignment="CENTER">
                                        <graphic>
                                           <ImageView fitHeight="47.0" fitWidth="47.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -415,7 +422,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="169.0" layoutY="14.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="83.0" stylesheets="@customeStyleSheet.css" text="New User">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="169.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loadUserManagement" prefHeight="69.0" prefWidth="83.0" stylesheets="@customeStyleSheet.css" text="New User">
                                        <graphic>
                                           <ImageView fitHeight="37.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -423,9 +430,9 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
-                                    <Button id="toolbar-button" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="289.0" layoutY="17.0" mnemonicParsing="false" prefHeight="71.0" prefWidth="121.0" stylesheets="@customeStyleSheet.css" text="DELETE ACCOUNT" />
+                                    <Button id="toolbar-button" alignment="BOTTOM_CENTER" contentDisplay="BOTTOM" layoutX="289.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#loadUserDelete" prefHeight="71.0" prefWidth="121.0" stylesheets="@customeStyleSheet.css" text="DELETE ACCOUNT" />
                                     <Button id="toolbar-button" layoutX="683.0" layoutY="18.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="84.0" stylesheets="@customeStyleSheet.css" text="LOGOUT" />
-                                    <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="318.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="39.0" fitWidth="39.0" layoutX="330.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../khamals/images/minus_circle_green.png" />
                                        </image>
@@ -456,7 +463,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="133.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#loadMCustmer" prefHeight="69.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="Manage Customer">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="133.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#loadMCustmer" onMouseDragExited="#populateTabeCus" onMouseEntered="#populateTabeCus" prefHeight="69.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="Manage Customer">
                                        <graphic>
                                           <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -464,7 +471,7 @@
                                              </image>
                                           </ImageView>
                                        </graphic></Button>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="295.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#loadADebt" prefHeight="76.0" prefWidth="82.0" stylesheets="@customeStyleSheet.css" text="Add Debtor">
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="295.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#loadADebt" onMouseEntered="#populateDeb" prefHeight="76.0" prefWidth="82.0" stylesheets="@customeStyleSheet.css" text="Add Debtor">
                                        <graphic>
                                           <ImageView fitHeight="47.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -482,7 +489,18 @@
                                        </graphic></Button>
                                  </children>
                               </AnchorPane>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);">
+                                 <children>
+                                    <TableView fx:id="CusorDeb" layoutX="2.0" layoutY="1.0" onMouseDragExited="#populateTabeCus" prefHeight="582.0" prefWidth="1120.0">
+                                      <columns>
+                                        <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
+                                        <TableColumn fx:id="nam" prefWidth="288.0" text="Name's" />
+                                          <TableColumn fx:id="location" prefWidth="266.0" text="Location" />
+                                          <TableColumn fx:id="tel" prefWidth="231.0" text="Telephone Number" />
+                                          <TableColumn fx:id="id" prefWidth="254.0" text="Identification Number" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                           </items>
                         </SplitPane>
                      </children>
@@ -496,10 +514,9 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@customeStyleSheet.css">
                                  <children>
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#loadSalesReport" prefHeight="76.0" prefWidth="92.0" stylesheets="@customeStyleSheet.css" text="Sales Report" textAlignment="CENTER" />
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="133.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#LoadCashierRepot" prefHeight="69.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="Cashier Report" />
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="295.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#loadReport" prefHeight="76.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="General report" />
-                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="424.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#loadInvetoryReport" prefHeight="66.0" prefWidth="95.0" stylesheets="@customeStyleSheet.css" text="Items History" />
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="59.0" layoutY="16.0" mnemonicParsing="false" onMouseClicked="#LoadCashierRepot" prefHeight="69.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="Cashier Report" />
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="214.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#loadReport" prefHeight="76.0" prefWidth="115.0" stylesheets="@customeStyleSheet.css" text="General report" />
+                                    <Button id="toolbar-button" contentDisplay="TOP" layoutX="365.0" layoutY="13.0" mnemonicParsing="false" onMouseClicked="#LoadCashierRepot" prefHeight="66.0" prefWidth="95.0" stylesheets="@customeStyleSheet.css" text="Cashier report" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" />

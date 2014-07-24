@@ -1,25 +1,23 @@
-package Inventory;
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+package Inventory;
 
-
+import Database.DatabaseHelper;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Formatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -27,8 +25,7 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import Database.DatabaseHelper;
-//import org.jdesktop.swingx.prompt.PromptSupport;
+import org.jdesktop.swingx.prompt.PromptSupport;
 
 /**
  *
@@ -57,8 +54,11 @@ public class DisplayInventory extends javax.swing.JFrame {
         initComponents();
         ImageIcon icon = new ImageIcon("add.png");
         addButton.setIcon(icon);
+        newCategoryLabel.setIcon(icon);
         icon = new ImageIcon("reduce.png");
         subtractButton.setIcon(icon);
+
+        PromptSupport.setPrompt("Search for a product", searchTextField);
         helper = new DatabaseHelper();
         array = new ArrayList<>();
         arrayList = new ArrayList<>();
@@ -157,6 +157,11 @@ public class DisplayInventory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(798, 439));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         inventoryPane.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -390,6 +395,11 @@ public class DisplayInventory extends javax.swing.JFrame {
         jPanel1.setMaximumSize(new java.awt.Dimension(393, 394));
 
         saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
 
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel20.setText("Cost of Production");
@@ -448,6 +458,7 @@ public class DisplayInventory extends javax.swing.JFrame {
         });
 
         newCategoryLabel.setBackground(new java.awt.Color(0, 0, 0));
+        newCategoryLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/khamals/images/add.png"))); // NOI18N
         newCategoryLabel.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newCategoryLabelMouseClicked(evt);
@@ -475,10 +486,11 @@ public class DisplayInventory extends javax.swing.JFrame {
                             .addComponent(codeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(costPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(newCategoryLabel))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(newCategoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(8, 12, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -486,8 +498,8 @@ public class DisplayInventory extends javax.swing.JFrame {
                             .addComponent(qtyTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(115, 115, 115)
-                                .addComponent(saveButton)))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                                .addComponent(saveButton)))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel17, jLabel18, jLabel20, jLabel21, jLabel22, jLabel23, jLabel9});
@@ -531,7 +543,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addComponent(codeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(newCategoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(newCategoryLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -539,7 +551,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel17, jLabel18, jLabel20, jLabel21, jLabel22, jLabel23, jLabel9, newCategoryLabel});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {jLabel17, jLabel18, jLabel20, jLabel21, jLabel22, jLabel23, jLabel9});
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {categoryComboBox, codeTextField, nameTextField});
 
@@ -556,7 +568,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(filler2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         addItemPanelLayout.setVerticalGroup(
             addItemPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -706,6 +718,17 @@ public class DisplayInventory extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_categoriesListMouseClicked
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+            this.toFront();
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_formWindowOpened
+
     /**
      * @param args the command line arguments
      */
@@ -726,15 +749,20 @@ public class DisplayInventory extends javax.swing.JFrame {
             }
         } catch (ClassNotFoundException | InstantiationException |
                 IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-          }
+            java.util.logging.Logger.getLogger(DisplayInventory.class
+                    .getName()).
+                    log(java.util.logging.Level.SEVERE, null, ex);
+        }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {// equivalence: java.awt.EventQueue.invokeLater(new Runnable()
             try {
                 new DisplayInventory().setVisible(true);
-
+                 
             } catch (SQLException ex) {
+                Logger.getLogger(DisplayInventory.class
+                        .getName()).log(Level.SEVERE, null, ex);
             }
         });
 
@@ -807,6 +835,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 manager.product = selectedItem;
                 manager.getProductDetails();
             } catch (IllegalStateException | SQLException ex) {
+                Logger.getLogger(DisplayInventory.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -831,6 +860,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 manager.product = selectedItem;
                 manager.getProductDetails();
             } catch (IllegalStateException | SQLException ex) {
+                Logger.getLogger(DisplayInventory.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -848,6 +878,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                     addModifyProduct();
                 }
             } catch (SQLException ex) {
+                Logger.getLogger(DisplayInventory.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -863,9 +894,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 String desc = descriptionTextArea.getText();
                 String category = selectedCategory; //categoryTextField.getText();
                 System.out.println(selectedCategory);
-                
-                        /*= toSentenceCase(category)*/
-                        
+               // category = toSentenceCase(category);
                 Integer.parseInt(costPriceTextField.getText());
                 minPrice = Integer.parseInt(minPriceTextField.getText());
 
@@ -920,6 +949,7 @@ public class DisplayInventory extends javax.swing.JFrame {
                 }
                 System.out.println(action);
                 manager.getAll();
+                inventoryPane.setSelectedComponent(addItemPanel);
             } catch (SQLException e) {
                 //if this catch doesnot create a duplicate entery error (primary key voilation)
                 //then the error is something else
@@ -962,12 +992,16 @@ public class DisplayInventory extends javax.swing.JFrame {
         }
 
         private void removeProduct() throws SQLException {
-            query = "DELETE FROM PRODUCT WHERE NAME = '" + selectedItem + "'";
+            int response = JOptionPane.showConfirmDialog(inventoryPane, "Are you sure?");
+            if (response == JOptionPane.OK_OPTION) {
+                 query = "DELETE FROM PRODUCT WHERE NAME = '" + selectedItem + "'";
             helper.setQuery(query);
             manager.category = selectedCategory;
             selectedItem = manager.getProducts();
             manager.product = selectedItem;
             manager.getAll();
+            }
+           
         }
     }
 
@@ -1017,7 +1051,8 @@ public class DisplayInventory extends javax.swing.JFrame {
                         manager.getProductDetails();
                     }
                 } catch (SQLException | IllegalStateException ex) {
-                  }
+                    Logger.getLogger(DisplayInventory.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }
@@ -1120,19 +1155,19 @@ public class DisplayInventory extends javax.swing.JFrame {
             }
         }
 
-        public void getProductDetails(ResultSet resultSet) throws SQLException {
-            nameLabel.setText(helper.resultSet.getString("NAME"));
-            costPriceLabel.setText(resultSet.getString("COST_PRICE"));//int will be converted to string
-            minPriceLabel.setText(resultSet.getString("MIN_SELLING_PRICE"));
-
-            Date date = new Time(Long.parseLong(resultSet.getString("LASTLY_ADDED_ON")));
-            lastAddedLabel.setText(date.toString());//Get a string representation of the date
-            qtyAddedLabel.setText(resultSet.getString("QUANTITY_ADDED"));
-
-            date = new Time(Long.parseLong(resultSet.getString("LASTLY_SOLD_ON")));
-            lastSoldLabel.setText(date.toString());
-            qtySoldLabel.setText(resultSet.getString("LAST_QUANTITY_SOLD"));
-        }
+//        public void getProductDetails(ResultSet resultSet) throws SQLException {
+//            nameLabel.setText(helper.resultSet.getString("NAME"));
+//            costPriceLabel.setText(resultSet.getString("COST_PRICE"));//int will be converted to string
+//            minPriceLabel.setText(resultSet.getString("MIN_SELLING_PRICE"));
+//
+//            Date date = new Time(Long.parseLong(resultSet.getString("LASTLY_ADDED_ON")));
+//            lastAddedLabel.setText(date.toString());//Get a string representation of the date
+//            qtyAddedLabel.setText(resultSet.getString("QUANTITY_ADDED"));
+//
+//            date = new Time(Long.parseLong(resultSet.getString("LASTLY_SOLD_ON")));
+//            lastSoldLabel.setText(date.toString());
+//            qtySoldLabel.setText(resultSet.getString("LAST_QUANTITY_SOLD"));
+//        }
 
         public void addQuantity() throws SQLException {
             try {
@@ -1230,7 +1265,8 @@ public class DisplayInventory extends javax.swing.JFrame {
                 helper.setQuery(query);
                 manager.getAll();
             } catch (SQLException | IllegalStateException ex) {
-                }
+                Logger.getLogger(DisplayInventory.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }

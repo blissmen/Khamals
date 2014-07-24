@@ -80,6 +80,11 @@ public class LoginType extends javax.swing.JFrame {
         jLabel4.setText("- Selecting Permanent Login keeps you logged in for three hours");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jDesktopPane1.setBackground(new java.awt.Color(204, 204, 204));
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Login"));
@@ -241,8 +246,6 @@ public class LoginType extends javax.swing.JFrame {
         time = 180;
     }
        Calendar lendar = Calendar.getInstance();
-        System.out.println(""+lendar.getTime().toString().substring(11, 19));
-        System.out.println(lendar.getTime().getMinutes());
         Date bb = lendar.getTime();
         bb.setMinutes(lendar.getTime().getMinutes()+time);
         System.out.println(lendar.getTime()+": "+bb);
@@ -269,9 +272,11 @@ public class LoginType extends javax.swing.JFrame {
                    System.out.println(Users.startTime);
                    System.out.println(Users.stopTime);
                    System.out.println(Users.Available(jTextField1.getText()));
+                   this.dispose();
                }
                else
                {
+                   JOptionPane.showMessageDialog(this, bb,"Faillure to Login", time);
                    System.out.println("Login failure");
                    System.out.println(pass+":"+jPasswordField1.getText());
                }
@@ -293,6 +298,13 @@ public class LoginType extends javax.swing.JFrame {
         //System.out.println(Users.Available(jTextField1.getText()));
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+ this.toFront();
+     this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+     this.setLocationRelativeTo(null);
+     // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

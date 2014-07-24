@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Invntory;
+package Inventory;
 
 import javafx.beans.property.SimpleStringProperty;
 

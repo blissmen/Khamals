@@ -4,11 +4,11 @@
  */
 package Sales;
 
-import Database.DatabaseHelper;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import Database.DatabaseHelper;
 
 /**
  *
@@ -123,8 +123,13 @@ public class RevokeSale extends javax.swing.JPanel {
         
         getAllTransactionGeneralData();
        //Remove all existing items in the combo box
+       try{
         productNamesComboBox.removeAllItems();
-        
+       }
+       catch(Exception nn)
+       {
+           System.out.println(nn.getCause());
+       }
         //Now, add all the new elements
         for(TransactionGeneral a: listOfGeneralTransactions){
             productNamesComboBox.addItem(a.getTransactionCustomer());
@@ -517,8 +522,12 @@ public class RevokeSale extends javax.swing.JPanel {
         
         
         getAllTransactionGeneralData();               
-        populateComboxWithProductNames(jComboBox1);
-        
+  try{        populateComboxWithProductNames(jComboBox1);
+     }
+  catch(Exception pp)
+  {
+      System.out.println(pp.getCause());
+  }
     }
     
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden

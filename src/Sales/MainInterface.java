@@ -4,8 +4,6 @@
  */
 package Sales;
 
-import User.Users;
-
 /**
  *
  * @author sebs
@@ -17,7 +15,7 @@ public class MainInterface extends javax.swing.JFrame {
      */
    
     public MainInterface() {
-        Users u= new Users();
+//        Users u= new Users();
         ProductsForSales p = new ProductsForSales();
         
         initComponents();
@@ -35,13 +33,18 @@ public class MainInterface extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        salesTransactionInterface1 = new Sales.SalesTransactionInterface();
+        salesTransactionInterface1 = new inventorymangementsystem.SalesTransactionInterface();
         jPanel3 = new javax.swing.JPanel();
-        revokeSale1 = new Sales.RevokeSale();
+        revokeSale1 = new inventorymangementsystem.RevokeSale();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sales");
         setLocationByPlatform(true);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jToolBar1.setRollover(true);
 
@@ -125,13 +128,31 @@ public class MainInterface extends javax.swing.JFrame {
         System.out.println("contadf asdfh");
         
         //Reload the form so that recent data is gotten
-        SalesTransactionInterface.reloadForm();
+  try{        SalesTransactionInterface.reloadForm();
+  }
+  catch(Exception h)
+  {
+      System.out.println(h.getCause());
+  }
+  
     }//GEN-LAST:event_jPanel1ComponentShown
 
     private void jPanel3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel3ComponentShown
   
-        RevokeSale.upDateMe();
+      try{  RevokeSale.upDateMe();}
+      catch(Exception nn)
+      {
+          System.out.println(nn.getCause());
+      }
     }//GEN-LAST:event_jPanel3ComponentShown
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        this.toFront();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -172,7 +193,7 @@ public class MainInterface extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JToolBar jToolBar1;
-    private Sales.RevokeSale revokeSale1;
-    private Sales.SalesTransactionInterface salesTransactionInterface1;
+    private inventorymangementsystem.RevokeSale revokeSale1;
+    private inventorymangementsystem.SalesTransactionInterface salesTransactionInterface1;
     // End of variables declaration//GEN-END:variables
 }

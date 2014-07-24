@@ -4,11 +4,10 @@
  */
 package Sales;
 
-import Database.DatabaseHelper;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import javax.swing.JComboBox;
-
+import Database.DatabaseHelper;
 
 //p.getProductIdsComboBox()
 /**

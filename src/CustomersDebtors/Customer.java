@@ -34,12 +34,7 @@ public class Customer extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(Customer.class.getName()).log(Level.SEVERE, null, ex);
         }
-        try{ populateTable();
-               }
-               catch(Exception hgh)
-               {
-                   System.out.println(hgh.toString());
-               }
+        
                populateComboBox1();
                
     }
@@ -56,9 +51,6 @@ public class Customer extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jPopupMenu2 = new javax.swing.JPopupMenu();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jDesktopPane3 = new javax.swing.JDesktopPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jDesktopPane2 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -114,147 +106,6 @@ public class Customer extends javax.swing.JFrame {
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setTabPlacement(javax.swing.JTabbedPane.LEFT);
-
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(468, 500));
-
-        jTable1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Index", "Names", "Identification Number", "Location", "Telephone"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jTable1.setMinimumSize(new java.awt.Dimension(120, 1000));
-        jTable1.setOpaque(false);
-        jTable1.setRowHeight(20);
-        jTable1.setRowMargin(2);
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jDesktopPane3Layout = new javax.swing.GroupLayout(jDesktopPane3);
-        jDesktopPane3.setLayout(jDesktopPane3Layout);
-        jDesktopPane3Layout.setHorizontalGroup(
-            jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
-        );
-        jDesktopPane3Layout.setVerticalGroup(
-            jDesktopPane3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jDesktopPane3.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jTabbedPane1.addTab("CUSTOMERS LIST", jDesktopPane3);
 
         jPanel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         jPanel1.setOpaque(false);
@@ -632,7 +483,7 @@ public class Customer extends javax.swing.JFrame {
                     this.typena.setText("");
                     fnam.setText("");
                 }
-                populateTable();
+              //  populateTable();
             }
             else
             {
@@ -707,7 +558,7 @@ public class Customer extends javax.swing.JFrame {
                 ln.setText("");
                 rslt.setText("Succes In adding New Customer");
                 populateComboBox1();
-                populateTable();
+                //populateTable();
             }
             else
                 rslt.setText("Faillure");
@@ -767,7 +618,6 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JDesktopPane jDesktopPane2;
-    private javax.swing.JDesktopPane jDesktopPane3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -790,9 +640,7 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField la;
     private javax.swing.JTextField ln;
     private javax.swing.JTextField lna;
@@ -804,41 +652,7 @@ public class Customer extends javax.swing.JFrame {
     private javax.swing.JTextField typena;
     // End of variables declaration//GEN-END:variables
 
-    private void populateTable() {
-    ArrayList    Names = new ArrayList();
-    ArrayList    ID        = new ArrayList();
-    ArrayList    location  = new ArrayList();
-    ArrayList    telephone = new ArrayList();
-    ArrayList    fname     = new ArrayList();
-    ArrayList    sname     = new ArrayList();
-    Functions function     = new Functions();
-    fname = function.getAllData("FIRST_NAME","Customers");
-    sname = function.getAllData("LAST_NAME","Customers");
-    ID = function.getAllData("CODE","Customers");
-    location = function.getAllData("LOCATION","Customers");
-    telephone = function.getAllData("TELEPHONE","Customers");
-     for(int i =0 ; i<fname.size();i++)
-    {
-    jTable1.setValueAt(i, i, 0);
-    }
-    for(int i =0 ; i<fname.size();i++)
-    {
-    jTable1.setValueAt(fname.get(i)+" "+sname.get(i), i, 1);
-    }
-     for(int i =0 ; i<fname.size();i++)
-    {
-    jTable1.setValueAt(ID.get(i), i, 2);
-    }
-      for(int i =0 ; i<fname.size();i++)
-    {
-    jTable1.setValueAt(location.get(i), i, 3);
-    }
-       for(int i =0 ; i<fname.size();i++)
-    {
-    jTable1.setValueAt(telephone.get(i), i, 4);
-    }
-    }
-
+    
   private void populateComboBox1() {
     ArrayList    sname = new ArrayList();
     Functions function = new Functions();

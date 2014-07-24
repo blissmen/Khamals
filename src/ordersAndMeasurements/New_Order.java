@@ -174,6 +174,11 @@ public class New_Order extends javax.swing.JFrame {
         jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jDesktopPane1.setBackground(new java.awt.Color(153, 153, 153));
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Record New Order"));
@@ -369,8 +374,7 @@ public class New_Order extends javax.swing.JFrame {
                 .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
-                        .addComponent(warning1Lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(warning1Lbl))
                     .addGroup(jDesktopPane1Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -572,6 +576,12 @@ public class New_Order extends javax.swing.JFrame {
     private void dueDatePickerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_dueDatePickerKeyTyped
         this.warning2Lbl.setVisible(true);
     }//GEN-LAST:event_dueDatePickerKeyTyped
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.toFront();
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
