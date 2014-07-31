@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="637.0" prefWidth="1118.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="khamals.DisplayAndEditOrdersController">
+    <stylesheets>
+        <URL value="@customeStyleSheet.css" />
+    </stylesheets>
+   <children>
+      <Button fx:id="closeBtn" contentDisplay="RIGHT" layoutX="967.0" layoutY="559.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="Cancel">
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/cancel.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="cancelOrder" layoutX="85.0" layoutY="556.0" mnemonicParsing="false" onAction="#deleteSelectedOrder" prefHeight="29.0" prefWidth="101.0" text="Delete">
+         <graphic>
+            <ImageView fitHeight="22.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/delete.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ImageView fitHeight="22.0" fitWidth="29.0" layoutX="1024.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/search1.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="471.0" layoutY="58.0" text="To:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="471.0" layoutY="24.0" text="From:" textFill="WHITE">
+         <font>
+            <Font name="Arial Bold" size="14.0" />
+         </font>
+      </Label>
+      <Button fx:id="searchBtn" layoutX="706.0" layoutY="24.0" mnemonicParsing="false" onAction="#searchDatePeriod" prefHeight="39.0" prefWidth="82.0" text="Filter Orders" />
+      <DatePicker fx:id="dateToFilterDatePicker" layoutX="520.0" layoutY="58.0" />
+      <DatePicker fx:id="dateFromFilterDatePiker" layoutX="520.0" layoutY="24.0" />
+      <TextField fx:id="customerNameSearchTextFld" layoutX="904.0" layoutY="24.0" />
+      <Button layoutX="85.0" layoutY="24.0" mnemonicParsing="false" onAction="#refreshOrdersTableBtnActionPerformed" prefHeight="25.0" prefWidth="100.0" text="Refresh">
+         <graphic>
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/interact.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <ScrollPane layoutX="85.0" layoutY="83.0" prefHeight="463.0" prefWidth="968.0">
+         <content>
+            <TableView fx:id="ordersTable" prefHeight="462.0" prefWidth="967.0">
+               <columns>
+                  <TableColumn fx:id="customerNameColumn" prefWidth="189.0" text="Customer Name" />
+                  <TableColumn fx:id="numberRequestedColumn" prefWidth="126.0" text="Number requested" />
+                  <TableColumn fx:id="orderDateColumn" prefWidth="122.0" text="Order date" />
+                  <TableColumn fx:id="deliveryDateColumn" prefWidth="120.0" text="Delivery date" />
+                  <TableColumn fx:id="priceColumn" prefWidth="99.0" text="Price" />
+                  <TableColumn fx:id="orderIDColumn" prefWidth="114.0" text="Order id" />
+                  <TableColumn fx:id="productNameColumn" prefWidth="196.0" text="Product Name" />
+               </columns>
+            </TableView>
+         </content>
+      </ScrollPane>
+      <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="1021.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/search1.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

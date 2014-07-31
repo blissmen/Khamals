@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="637.0" prefWidth="1118.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="khamals.NewOrderController">
+   <children>
+      <AnchorPane layoutX="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="480.0" style="-fx-background-color: white;">
+         <children>
+            <Label layoutX="40.0" layoutY="42.0" text="Order Date :*">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="99.0" text="Customer Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="38.0" layoutY="153.0" text="Product Name:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="205.0" text="Number Requested:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="312.0" text="Delivery Date:*">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="367.0" text="Total Cost:">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <DatePicker fx:id="placedDatePicker" layoutX="181.0" layoutY="38.0" prefHeight="25.0" prefWidth="229.0" />
+            <ComboBox fx:id="customerCmBox" layoutX="181.0" layoutY="95.0" prefHeight="25.0" prefWidth="229.0" />
+            <ComboBox fx:id="pdtCodeCmBox" layoutX="181.0" layoutY="149.0" prefHeight="25.0" prefWidth="229.0" />
+            <TextField fx:id="numberReqJSpinner" layoutX="181.0" layoutY="201.0" onKeyTyped="#restrictToNumbers" prefHeight="25.0" prefWidth="229.0" />
+            <CheckBox fx:id="requireMeasurementsChkBox" layoutX="181.0" layoutY="259.0" mnemonicParsing="false" text="Require Measurements" />
+            <TextField fx:id="totalCostTxtFld" layoutX="181.0" layoutY="363.0" onKeyTyped="#restrictToNumbers" prefHeight="25.0" prefWidth="229.0" />
+            <DatePicker fx:id="dueDatePicker" layoutX="181.0" layoutY="308.0" prefHeight="25.0" prefWidth="229.0" />
+            <Button id="whiteButton" fx:id="submitBtn" contentDisplay="CENTER" layoutX="229.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#submitDataToDatabase" prefHeight="25.0" prefWidth="23.0" style="-fx-background-color: white;" stylesheets="@customeStyleSheet.css">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true" style="-fx-background-color: white;">
+                     <image>
+                        <Image url="@images/agt_action_success.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button id="whiteButton" fx:id="cancelBtn" layoutX="358.0" layoutY="427.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="52.0" style="-fx-background-color: white;" stylesheets="@customeStyleSheet.css">
+               <graphic>
+                  <ImageView id="whiteButton" fitHeight="37.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/cancel.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomersAndDebtors.CustomersAndDebtorsController">
+   <children>
+      <SplitPane dividerPositions="0.15129682997118155" orientation="VERTICAL" prefHeight="695.0" prefWidth="1120.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@../khamals/customeStyleSheet.css">
+               <children>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadAcustomer" prefHeight="76.0" prefWidth="92.0" text="Add customer" textAlignment="CENTER">
+                     <graphic>
+                        <ImageView fitHeight="43.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/addCustomer.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="133.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadMCustmer" prefHeight="76.0" prefWidth="115.0" text="Manage Customer">
+                     <graphic>
+                        <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/charlieandthechocolatefactory2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="295.0" layoutY="13.0" mnemonicParsing="false" onAction="#loadADebt" prefHeight="76.0" prefWidth="82.0" text="Add Debtor">
+                     <graphic>
+                        <ImageView fitHeight="47.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/add_debtor.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="416.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadPDebt" prefHeight="76.0" prefWidth="85.0" text="Pay Debt">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/collect%20money.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="518.0" layoutY="13.0" mnemonicParsing="false" onAction="#populateTabeCus" prefHeight="76.0" prefWidth="101.0" text="View Costumers">
+                     <graphic>
+                        <ImageView fitHeight="47.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/manAndWoman.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="643.0" layoutY="12.0" mnemonicParsing="false" onAction="#populateDeb" prefHeight="81.0" prefWidth="92.0" text="View Debtors">
+                     <graphic>
+                        <ImageView fitHeight="52.0" fitWidth="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/debt.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="anchorPane" minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);">
+               <children>
+                  <ScrollPane layoutX="2.0" layoutY="1.0" prefViewportHeight="582.0" prefViewportWidth="1120.0">
+                     <content>
+                        <TableView fx:id="CusorDeb" layoutX="2.0" layoutY="1.0" prefHeight="582.0" prefWidth="1120.0">
+                           <columns>
+                              <TableColumn fx:id="index" prefWidth="75.0" text="INDEX" />
+                              <TableColumn fx:id="nam" prefWidth="288.0" text="NAMES" />
+                              <TableColumn fx:id="location" prefWidth="266.0" text="LOCATION" />
+                              <TableColumn fx:id="tel" prefWidth="231.0" text="TELEPHONE NUMBER" />
+                              <TableColumn fx:id="id" prefWidth="256.0" text="IDENTIFICATION NUMBER" />
+                           </columns>
+                        </TableView>
+                     </content>
+                  </ScrollPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

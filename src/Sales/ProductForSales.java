@@ -4,6 +4,9 @@
  */
 package Sales;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author sebs
@@ -14,7 +17,96 @@ public class ProductForSales {
    String productName; //The name of the product
    int    quantityInStock;
    int    productSellingPrince;
+ public SimpleStringProperty PName= new SimpleStringProperty();
+  public  SimpleStringProperty Codes = new SimpleStringProperty();
+    public SimpleStringProperty Qty= new SimpleStringProperty();
+  public  SimpleStringProperty Desc = new SimpleStringProperty();
+   public SimpleStringProperty Disc= new SimpleStringProperty();
+  public  SimpleStringProperty Up = new SimpleStringProperty();
+   public SimpleStringProperty Total= new SimpleStringProperty();
+  public  SimpleStringProperty Inx = new SimpleStringProperty();
+  
+      public String getPName(){
+        return PName.get();
+    }
+    public String getCodes(){
+        return Codes.get();
+    }
+    public String getQty(){
+        return Qty.get();
+    }
+    
+    
+     public String getDesc(){
+        return Desc.get();
+    }
+    
+    public String getDisc(){
+        return Disc.get();
+    }
+    public String getTotal(){
+        return Total.get();
+    }
+    public String getUp(){
+        return Up.get();        
+    }
+    public String getInx(){
+        return Inx.get();        
+    }
    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
    public ProductForSales(){}
    public ProductForSales(String name, String code,int sellingPrice, int quantityInStock){
        

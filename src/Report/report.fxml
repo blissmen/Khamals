@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Report.ReportController">
+   <children>
+      <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="733.0" prefWidth="1011.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Graphical View">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="597.0" prefWidth="769.0">
+                     <children>
+                        <BarChart fx:id="chart" layoutX="-9.0" layoutY="107.0" legendSide="TOP" prefHeight="526.0" prefWidth="940.0" title="REPORT">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                           <effect>
+                              <Lighting>
+                                 <bumpInput>
+                                    <Shadow />
+                                 </bumpInput>
+                                
+                                    </Lighting>
+                           </effect>
+                        </BarChart>
+                        <RadioButton fx:id="cas" layoutX="36.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#fillComBo" text="Cashier Report" />
+                        <RadioButton fx:id="sal" layoutX="240.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#fillComBo" text="Sales Report" />
+                        <Button fx:id="plot" contentDisplay="TOP" layoutX="603.0" layoutY="36.0" mnemonicParsing="false" onMouseClicked="#PlotGraph" prefHeight="72.0" prefWidth="98.0" text="Report">
+                           <graphic>
+                              <ImageView fitHeight="43.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../khamals/images/Icon_59-512.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <ComboBox fx:id="comb" editable="true" layoutX="213.0" layoutY="72.0" prefHeight="25.0" prefWidth="200.0" promptText="Select Name" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Detailed Report">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="664.0" prefWidth="945.0">
+                     <children>
+                        <TableView fx:id="tabsl" layoutX="7.0" layoutY="251.0" prefHeight="453.0" prefWidth="993.0" />
+                        <RadioButton fx:id="CashierReport" layoutX="24.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#ActivatePanel" text="Cashier Report" />
+                        <Pane fx:id="panelC" disable="true" layoutX="7.0" layoutY="40.0" prefHeight="118.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="QuantitySold" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Total Amount Sold" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="SalesReport" layoutX="271.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#activatePanelS" text="Sales Report" />
+                        <Pane fx:id="panelS" disable="true" layoutX="214.0" layoutY="40.0" prefHeight="130.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="SGood" layoutX="63.0" layoutY="53.0" mnemonicParsing="false" text="Transaction ID" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="InventoryReport" layoutX="632.0" layoutY="23.0" mnemonicParsing="false" onMouseClicked="#ActivatePanelI" text="INVENTORY/STOCK" />
+                        <Pane fx:id="panelI" disable="true" layoutX="588.0" layoutY="43.0" prefHeight="124.0" prefWidth="200.0" />
+                        <DatePicker fx:id="Stdate" layoutX="101.0" layoutY="164.0" />
+                        <DatePicker fx:id="Edate" layoutX="414.0" layoutY="164.0" />
+                        <Label layoutX="24.0" layoutY="155.0" text="From:">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="321.0" layoutY="155.0" text="To :">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Button contentDisplay="TOP" layoutX="711.0" layoutY="134.0" mnemonicParsing="false" onMouseClicked="#populateTableR" prefHeight="77.0" prefWidth="76.0" text="Report">
+                           <graphic>
+                              <ImageView fitHeight="48.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../khamals/images/agt_action_success.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Print Reports">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane fx:id="PanelC1" disable="true" layoutX="43.0" layoutY="166.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="QuantitySold1" layoutY="42.0" mnemonicParsing="false" text="Total Amount Sold" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="CashieReport1" layoutX="36.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#activatePanel1" text="Cashier Report" />
+                        <Label layoutX="303.0" layoutY="24.0" text="To :">
+                           <font>
+                              <Font size="22.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="36.0" layoutY="24.0" text="From:">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </Label>
+                        <DatePicker fx:id="ToDate1" layoutX="366.0" layoutY="27.0" />
+                        <DatePicker fx:id="FromDate1" layoutX="112.0" layoutY="27.0" />
+                        <Pane fx:id="panelI1" disable="true" layoutX="540.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="IName1" layoutX="50.0" layoutY="14.0" mnemonicParsing="false" text="Good Name" />
+                              <CheckBox fx:id="IDate1" layoutX="50.0" layoutY="40.0" mnemonicParsing="false" text="Date" />
+                              <CheckBox fx:id="IQuantity1" layoutX="50.0" layoutY="69.0" mnemonicParsing="false" text="Amount Brougth In" />
+                              <CheckBox fx:id="IUPrice1" layoutX="50.0" layoutY="100.0" mnemonicParsing="false" text="Unit Cost Price" />
+                              <CheckBox fx:id="IDiscount1" layoutX="50.0" layoutY="139.0" mnemonicParsing="false" text="Description" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="InventoryReport1" layoutX="560.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#activatePanelI1" text="Inventory" />
+                        <Pane fx:id="panelS1" disable="true" layoutX="221.0" layoutY="152.0" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="SGoodSold1" layoutX="64.0" layoutY="14.0" mnemonicParsing="false" text="Good Name" />
+                              <CheckBox fx:id="SAmount1" layoutX="64.0" layoutY="43.0" mnemonicParsing="false" text="Amount" />
+                              <CheckBox fx:id="SID1" layoutX="64.0" layoutY="72.0" mnemonicParsing="false" text="Transaction ID" />
+                              <CheckBox fx:id="SDate1" layoutX="64.0" layoutY="100.0" mnemonicParsing="false" text="Date Of Sale" />
+                              <CheckBox fx:id="SQuantity1" layoutX="64.0" layoutY="134.0" mnemonicParsing="false" text="Quantity Sold" />
+                              <CheckBox fx:id="cusname" layoutX="64.0" layoutY="163.0" mnemonicParsing="false" text="Customer Name" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="SalesReport1" layoutX="243.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#activatePanelS1" text="Sales Report" />
+                        <Button fx:id="printer" contentDisplay="TOP" layoutX="260.0" layoutY="425.0" mnemonicParsing="false" onMouseClicked="#PrintReport" prefHeight="152.0" prefWidth="342.0" text="Print Report">
+                           <graphic>
+                              <ImageView fitHeight="115.0" fitWidth="134.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../khamals/images/printer_nopaper.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <PointLight color="CHARTREUSE" lightOn="true" />
+                        <Pane fx:id="panetST1" disable="true" layoutX="758.0" layoutY="143.0" prefHeight="200.0" prefWidth="239.0">
+                           <children>
+                              <CheckBox fx:id="STAmountTSold1" layoutX="44.0" layoutY="27.0" mnemonicParsing="false" text="Product Total Amount Ever Sold" />
+                              <CheckBox fx:id="STDate1" layoutX="45.0" layoutY="66.0" mnemonicParsing="false" text="Product Last Sold date" />
+                              <CheckBox fx:id="STIDate1" layoutX="44.0" layoutY="100.0" mnemonicParsing="false" text="Product Last Inventory Date" />
+                              <CheckBox fx:id="STUPrice1" layoutX="44.0" layoutY="138.0" mnemonicParsing="false" text="Unit Price" />
+                           </children>
+                        </Pane>
+                        <RadioButton fx:id="StockReport1" layoutX="774.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#activatePanelSt1" text="Stock" />
+                        <RadioButton fx:id="fullReport1" layoutX="640.0" layoutY="32.0" mnemonicParsing="false" text="FULL REPORT" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

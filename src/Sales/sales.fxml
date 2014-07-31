@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="1120.0" stylesheets="@../khamals/customeStyleSheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sales.SalesController">
+   <children>
+      <Pane layoutX="46.0" layoutY="5.0">
+         <children>
+            <Label layoutX="767.0" layoutY="91.0" text="Total Price(FCFA)" />
+            <TextField fx:id="disc2" layoutX="776.0" layoutY="472.0" onKeyPressed="#CalculateDisc" onKeyReleased="#CalculateDisc" onKeyTyped="#CalculateDisc" promptText="Enter Bulk Discount" text="0" />
+            <Label layoutX="656.0" layoutY="615.0" prefHeight="28.0" prefWidth="89.0" text="BALANCE" textFill="#e13b3b">
+               <effect>
+                  <Bloom />
+               </effect>
+            </Label>
+            <Label layoutX="767.0" layoutY="128.0" text="Discount%" />
+            <TableView fx:id="Cart" layoutX="7.0" layoutY="232.0" prefHeight="188.0" prefWidth="1021.0">
+              <columns>
+                <TableColumn fx:id="idex" prefWidth="52.0" text="Index" />
+                <TableColumn fx:id="cd" prefWidth="98.0" text="Code" />
+                  <TableColumn fx:id="nm" prefWidth="153.0" text="Name" />
+                  <TableColumn fx:id="dsc" prefWidth="238.0" text="Description" />
+                  <TableColumn fx:id="qt" prefWidth="124.0" text="Qty" />
+                  <TableColumn fx:id="p" prefWidth="115.0" text="Unit Price" />
+                  <TableColumn fx:id="disc" prefWidth="116.0" text="Discount" />
+                  <TableColumn fx:id="tp" prefWidth="130.0" text="Total" />
+              </columns>
+               <cursor>
+                  <Cursor fx:constant="DISAPPEAR" />
+               </cursor>
+               <effect>
+                  <Glow level="0.12" />
+               </effect>
+            </TableView>
+            <Label layoutX="653.0" layoutY="567.0" text="Cash Tendered" />
+            <Label layoutX="433.0" layoutY="96.0" prefHeight="25.0" prefWidth="98.0" text="Quantity Available" />
+            <Label fx:id="RecieptId" layoutX="134.0" layoutY="50.0" prefHeight="28.0" prefWidth="231.0" text="255" />
+            <Label layoutX="653.0" layoutY="426.0" prefHeight="25.0" prefWidth="98.0" text="Sub-Total" />
+            <Button id="toggle-" fx:id="remove" contentDisplay="TOP" layoutX="949.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#removeItem" prefHeight="68.0" prefWidth="79.0" text="Delete">
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../khamals/images/Remove-icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="653.0" layoutY="476.0" text="Discount" />
+            <Label layoutX="20.0" layoutY="141.0" text="Cashier Name" />
+            <TextField fx:id="QuantityAvailable" editable="false" layoutX="556.0" layoutY="99.0" promptText="Amount in Stock" />
+            <Label fx:id="CPrice" layoutX="556.0" layoutY="142.0" prefHeight="28.0" prefWidth="150.0" text="N/A" />
+            <Label layoutX="20.0" layoutY="61.0" text="Reciept ID" />
+            <Label layoutX="20.0" layoutY="96.0" text="Customer Name" />
+            <TextField fx:id="CustomerName" layoutX="134.0" layoutY="92.0" prefHeight="25.0" prefWidth="280.0" promptText="Enter Name:John Doe" />
+            <Label layoutX="435.0" layoutY="148.0" prefHeight="17.0" prefWidth="112.0" text="Unit Cost Price(FCFA)" />
+            <Label fx:id="Stotal" layoutX="789.0" layoutY="422.0" prefHeight="40.0" prefWidth="149.0" text="N/A" textFill="#861515">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <Label fx:id="bal" layoutX="798.0" layoutY="601.0" prefHeight="40.0" prefWidth="89.0" text="N/A" textAlignment="CENTER" textFill="#d70f0fcf">
+               <font>
+                  <Font name="AngsanaUPC Bold" size="42.0" />
+               </font>
+            </Label>
+            <Button fx:id="print" contentDisplay="TOP" layoutX="34.0" layoutY="578.0" mnemonicParsing="false" onMouseClicked="#PrintReciept" prefHeight="79.0" prefWidth="231.0" text="Print Reciept" textFill="#d07f7f">
+               <graphic>
+                  <ImageView fitHeight="61.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../khamals/images/printer_nopaper.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <Label fx:id="CashierName" layoutX="134.0" layoutY="130.0" prefHeight="40.0" prefWidth="297.0" text="UNKNOWN" textAlignment="CENTER" textFill="#a17171" />
+            <ComboBox fx:id="ProductName" layoutX="554.0" layoutY="48.0" onAction="#fetchdata" prefWidth="150.0" />
+            <TextField fx:id="Quantity" layoutX="556.0" layoutY="188.0" onKeyPressed="#ValidateInput" onKeyReleased="#ValidateInput" onKeyTyped="#ValidateInput" promptText="Amount to Be Sold" />
+            <TextArea fx:id="remark" layoutX="23.0" layoutY="454.0" prefHeight="121.0" prefWidth="287.0" />
+            <Label layoutX="438.0" layoutY="52.0" text="Product Name" />
+            <Label contentDisplay="CENTER" layoutX="325.0" layoutY="454.0" prefHeight="99.0" prefWidth="274.0" text="SALE SUCCESSFULLY RECORDED" textAlignment="CENTER" textFill="#bc1515">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cash" layoutX="776.0" layoutY="563.0" onKeyPressed="#CalculateChange" onKeyReleased="#CalculateChange" onKeyTyped="#CalculateChange" />
+            <Button fx:id="emptycart" contentDisplay="TOP" layoutX="104.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#EmptyCart" prefHeight="40.0" prefWidth="90.0" text="Empty Cart">
+               <graphic>
+                  <ImageView fitHeight="27.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../khamals/images/delete.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <TextField fx:id="Price" layoutX="876.0" layoutY="44.0" onKeyPressed="#ValidateInput" onKeyReleased="#ValidateInput" onKeyTyped="#ValidateInput" promptText="Price For One" text="0" />
+            <Label layoutX="51.0" layoutY="425.0" text="REMARKS" />
+            <Separator layoutX="7.0" layoutY="34.0" prefHeight="14.0" prefWidth="989.0" />
+            <TextField fx:id="Discount" layoutX="876.0" layoutY="124.0" onKeyReleased="#ValidateInput" onKeyTyped="#ValidateInput" promptText="Discount For Good" text="0" />
+            <Button fx:id="AddCart" contentDisplay="TOP" layoutX="795.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#addCart" prefHeight="68.0" prefWidth="112.0" text="Add to Cart">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../khamals/images/add_to_cart.jpg" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label fx:id="tot" layoutX="789.0" layoutY="506.0" prefHeight="28.0" prefWidth="165.0" text="N/A" textFill="#977373">
+               <font>
+                  <Font size="36.0" />
+               </font>
+            </Label>
+            <Label layoutX="433.0" layoutY="192.0" text="Quantity" />
+            <Label contentDisplay="CENTER" prefHeight="40.0" prefWidth="995.0" text="KHAMALS SALES FORM" textAlignment="CENTER" wrapText="true">
+               <font>
+                  <Font size="23.0" />
+               </font>
+               <textFill>
+                  <LinearGradient cycleMethod="REFLECT" endX="0.43809523809523804">
+                     <stops>
+                        <Stop color="#433838" />
+                        <Stop color="WHITE" offset="1.0" />
+                     </stops>
+                  </LinearGradient>
+               </textFill>
+               <cursor>
+                  <Cursor fx:constant="NW_RESIZE" />
+               </cursor>
+               <effect>
+                  <Lighting bumpInput="$null">
+                     <light>
+                        <Light.Distant color="#3c1313" />
+                     </light>
+                  </Lighting>
+               </effect>
+            </Label>
+            <Label layoutX="767.0" layoutY="48.0" text="Unit Price(FCFA)" />
+            <TextField fx:id="TotalPrice" editable="false" layoutX="876.0" layoutY="87.0" promptText="Total Price Of Sale" />
+            <DatePicker fx:id="date" layoutX="851.0" layoutY="8.0" promptText="Date Of Sale" showWeekNumbers="true" />
+            <Button fx:id="submit" contentDisplay="TOP" layoutX="390.0" layoutY="583.0" mnemonicParsing="false" onMouseClicked="#ValidateSale" prefHeight="103.0" prefWidth="202.0" text="Validate Sale" textFill="#863e3e">
+               <font>
+                  <Font size="14.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="53.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../khamals/images/agt_action_success.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label layoutX="651.0" layoutY="533.0" text="Total Due" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

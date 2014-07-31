@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="594.0" prefWidth="1060.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomersAndDebtors.TakeDebtController">
+   <children>
+      <SplitPane dividerPositions="0.15129682997118155" orientation="VERTICAL" prefHeight="695.0" prefWidth="1120.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@../khamals/customeStyleSheet.css">
+               <children>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#takeDebt" prefHeight="69.0" prefWidth="80.0" text="Take Dept">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="123.0" layoutY="16.0" mnemonicParsing="false" onAction="#gotoMain" prefHeight="70.0" prefWidth="97.0" text="Cancel">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/minus_circle_green.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" stylesheets="@../khamals/customeStyleSheet.css" SplitPane.resizableWithParent="false">
+               <children>
+                  <Pane layoutX="304.0" layoutY="42.0" prefHeight="501.0" prefWidth="521.0" style="-fx-background-color: white;">
+                     <children>
+                        <GridPane layoutX="12.0" layoutY="15.0" prefHeight="472.0" prefWidth="498.0">
+                           <children>
+                              <Label text="DESCRIPTION" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="TOTAL AMOUNT" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="DEADLINE" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="CUSTOMER ">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="id" promptText="Enter the ID card number" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="amount" promptText="*Amount to be paid later" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <Label text="ID CARD NUMBER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="desc" prefHeight="200.0" prefWidth="200.0" promptText="*Brief decription of the transaction circumstance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <ComboBox fx:id="customer" prefHeight="25.0" prefWidth="424.0" GridPane.columnIndex="1" />
+                              <DatePicker fx:id="deadline" prefHeight="25.0" prefWidth="410.0" promptText="*Select a date " GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="138.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="360.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="35.0" valignment="BOTTOM" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="215.0" minHeight="10.0" prefHeight="178.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="93.0" minHeight="10.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="78.0" minHeight="10.0" prefHeight="35.0" valignment="TOP" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import java.net.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CustomersAndDebtors.ModifyAccountController">
+   <children>
+      <SplitPane dividerPositions="0.15129682997118155" orientation="VERTICAL" prefHeight="695.0" prefWidth="1120.0">
+         <items>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="1061.0" style="-fx-background-color: linear-gradient(#98a8bd 0%, #8195af 25%, #6d86a4 100%);;" stylesheets="@../MAIN/customeStyleSheet.css">
+               <children>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="74.0" prefWidth="113.0" stylesheets="@../MAIN/customeStyleSheet.css" text="Update Account">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="154.0" layoutY="16.0" mnemonicParsing="false" onAction="#deleteAccount" prefHeight="70.0" prefWidth="105.0" stylesheets="@../MAIN/customeStyleSheet.css" text="Delete Account">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/minus_circle_green.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button id="toolbar-button" contentDisplay="TOP" layoutX="289.0" layoutY="16.0" mnemonicParsing="false" onAction="#goToMain" prefHeight="70.0" prefWidth="97.0" stylesheets="@../MAIN/customeStyleSheet.css" text="Cancel">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="41.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../khamals/images/minus_circle_green.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" SplitPane.resizableWithParent="false">
+               <children>
+                  <Pane layoutX="296.0" layoutY="42.0" prefHeight="501.0" prefWidth="527.0" style="-fx-background-color: white;">
+                     <children>
+                        <GridPane layoutX="15.0" layoutY="25.0" prefHeight="451.0" prefWidth="498.0">
+                           <children>
+                              <Label text="ID CARD NUMBER" GridPane.rowIndex="1">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="EMAIL ADDRESS" GridPane.rowIndex="2">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="PHONE NUMBER" GridPane.rowIndex="3">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="LOCATION" GridPane.rowIndex="4">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="CUSTOMER NAME">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label text="USER TYPE" GridPane.rowIndex="6">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="id" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="email" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="phone" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="location" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                              <Label text="CREATED ON" GridPane.rowIndex="5">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="type" prefHeight="25.0" prefWidth="379.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                              <TextField fx:id="dateCreated" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                              <ComboBox fx:id="name" editable="true" prefHeight="25.0" prefWidth="399.0" promptText="select a customer" GridPane.columnIndex="1" />
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="244.0" minWidth="10.0" prefWidth="138.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="360.0" minWidth="10.0" prefWidth="360.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </Pane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</AnchorPane>
