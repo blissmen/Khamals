@@ -8,11 +8,18 @@ package Inventory;
 
 import General.ControlledScreen;
 import General.ScreensController;
-import static Inventory.InventoryController.ADDING;
-import static Inventory.InventoryController.action;
-import static Inventory.InventoryController.helper;
-import static Inventory.InventoryController.selectedCategory;
-import static Inventory.InventoryController.selectedItem;
+import Sales.SalesController;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import org.controlsfx.dialog.Dialogs;
+import org.jetbrains.annotations.NotNull;
+
 import java.awt.event.KeyEvent;
 import java.net.URL;
 import java.sql.SQLException;
@@ -23,23 +30,18 @@ import java.util.Formatter;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
+
+import static Inventory.InventoryController.*;
 import static khamals.mainInterfaceController.INVENTORY_SCREEN_ID;
-import org.controlsfx.dialog.Dialogs;
 
 /**
  * FXML Controller class
  *
  * @author Harvey
  */
+@SuppressWarnings("ALL")
 public class AddModifyController implements Initializable, ControlledScreen {
+    public static ModifyProduct modObject;
     @FXML
     private TextField nameField;
     @FXML
@@ -54,7 +56,6 @@ public class AddModifyController implements Initializable, ControlledScreen {
     private TextField qtyField;
     @FXML
     private ComboBox<String> categoryBox;
-    
     //manually declared variables
     private String name;
     private String code;
@@ -65,25 +66,37 @@ public class AddModifyController implements Initializable, ControlledScreen {
     private int quantity;
     private String query;
     private String prevName;
-    public static ModifyProduct modObject;
     private ScreensController screen;
 
+    @NotNull
+    public static String toSentenceCase(@NotNull String string) {
+        //return a string that starts with an uppercase letter: sentence case that is.
+        String[] temp;
+        temp = string.toLowerCase().split("[ ]");
+        String retrn = "";
+        for (String next : temp) {
+            retrn = retrn.concat(next.substring(0, 1).toUpperCase().
+                    concat(next.substring(1))).concat(" ");
+        }
+        retrn = retrn.trim();
+        return retrn;
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       modObject = new AddModifyController.ModifyProduct();
+        modObject = new AddModifyController.ModifyProduct();
         try {
+            categoryBox.getSelectionModel().select(0);
             modObject.fillComboBox();
         } catch (SQLException ex) {
             Logger.getLogger(AddModifyController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        categoryBox.valueProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            selectedCategory = newValue;
-        });
+        categoryBox.valueProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> selectedCategory = newValue);
+        categoryBox.getSelectionModel().select(0);
     }
 
     @FXML
@@ -95,6 +108,9 @@ public class AddModifyController implements Initializable, ControlledScreen {
     private void save(ActionEvent event) {
         try {
             addModifyProduct();
+            modObject.fillComboBox();
+            // SalesController.fill dat = new SalesController.fill();
+            SalesController.df.update();
         } catch (SQLException ex) {
             Logger.getLogger(AddModifyController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -113,7 +129,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
             code = productCode.getText();
             newCategory = getCategory();
             if (newCategory != null) {//you dont compare to null with ==
-            }else{
+            } else {
                 return;
             }
             newCategory = toSentenceCase(newCategory);
@@ -121,8 +137,6 @@ public class AddModifyController implements Initializable, ControlledScreen {
             cost = Integer.parseInt(costField.getText());
             minPrice = Integer.parseInt(minPriceField.getText());
 
-            if (action == ADDING) {
-                //read the quantity of adding a new product
                 quantity = Integer.parseInt(qtyField.getText());
                 Calendar calendar = Calendar.getInstance();
                 Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
@@ -140,18 +154,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
                         + minPrice + ", "
                         + "'" + date + "', "
                         + quantity + ")";
-            } else {
-
-                query = "UPDATE PRODUCT SET CODE = '" + code + "', "
-                        + "NAME = '" + name + "', "
-                        + "CATEGORY = '" + newCategory + "', "
-                        + "DESCRIPTION = '" + desc + "', "
-                        + "COST_PRICE = " + cost + ", "
-                        + "MIN_SELLING_PRICE = " + minPrice
-                        + " WHERE NAME = '" + (prevName.equals(name)
-                        ? name : prevName) + "'";
-            }
-        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            } catch (@NotNull NumberFormatException | StringIndexOutOfBoundsException e) {
             Dialogs.create().title("Empty fields").
                     masthead("Optional field - Description").
                     message("Please fill in all the required fields").showError();
@@ -160,6 +163,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
 
         try {
             helper.setQuery(query);
+            khamals.NewOrderController.varn.load();
             if (action == ADDING) {
                 Dialogs.create().title("Product Added").
                         message(name + " was added successfully to the "
@@ -221,7 +225,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
     }
 
     @FXML
-    public void handle(javafx.scene.input.KeyEvent event) {
+    public void handle(@NotNull javafx.scene.input.KeyEvent event) {
         KeyCode k = event.getCode();
         char c = event.getCharacter().charAt(0);
         if (!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_TAB
@@ -241,20 +245,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
         }
         Dialogs.create().title("Empty category").
                 message("You did not choose a category").showInformation();
-        return null;
-    }
-
-    public static String toSentenceCase(String string) {
-        //return a string that starts with an uppercase letter: sentence case that is.
-        String[] temp;
-        temp = string.toLowerCase().split("[ ]");
-        String retrn = "";
-        for (String next : temp) {
-            retrn = retrn.concat(next.substring(0, 1).toUpperCase().
-                    concat(next.substring(1))).concat(" ");
-        }
-        retrn = retrn.trim();
-        return retrn;
+        return "";
     }
 
     protected final class ModifyProduct {
@@ -272,7 +263,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
                 costField.setText(helper.resultSet.getString("COST_PRICE"));
                 minPriceField.setText(helper.resultSet.getString("MIN_SELLING_PRICE"));
                 qtyField.setText(helper.resultSet.getString("QUANTITY_AVAILABLE"));
-                qtyField.setEditable(false);
+               // qtyField.setEditable(false);
                 prevName = nameField.getText();
             } catch (SQLException ex) {
                 Logger.getLogger(AddModifyController.class.getName()).log(Level.SEVERE, null, ex);
@@ -283,7 +274,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
 
         public void fillComboBox() throws SQLException {
 //get the different categories
-            ArrayList<String> cats = new ArrayList<>();
+            ArrayList cats = new ArrayList();
             String tempCategory = selectedCategory;
             query = "SELECT DISTINCT CATEGORY FROM PRODUCT";
             helper.setQuery(query);
@@ -297,7 +288,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
                 } while (helper.resultSet.next());
                 categoryBox.getItems().addAll(cats);
                 selectedCategory = tempCategory;
-                categoryBox.getSelectionModel().select(selectedCategory);
+                categoryBox.getSelectionModel().select(0);
 //                System.out.println("selected: " + selectedCategory);
                 selectedCategory = newCategory;
             }
