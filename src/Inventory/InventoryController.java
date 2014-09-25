@@ -5,19 +5,11 @@
  */
 package Inventory;
 
+import CustomersAndDebtors.Functions;
 import General.ControlledScreen;
 import General.DatabaseHelper;
-import static General.GeneralFunctions.toSentenceCase;
 import General.ScreensController;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Formatter;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import Sales.SalesController;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,10 +24,20 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import static khamals.mainInterfaceController.ADD_MODIFY_ID;
 import org.controlsfx.control.action.Action;
 import org.controlsfx.dialog.Dialog;
 import org.controlsfx.dialog.Dialogs;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static General.GeneralFunctions.toSentenceCase;
+import static khamals.mainInterfaceController.ADD_MODIFY_ID;
 
 /**
  * FXML Controller class
@@ -44,6 +46,16 @@ import org.controlsfx.dialog.Dialogs;
  */
 public class InventoryController implements Initializable, ControlledScreen {
 
+    protected static final int ADDING = 1, MODIFYING = 2, FIRST = 1, SECOND = 2;
+    public static DatabaseHelper helper;
+    public static InventoryManager manager;
+    protected static ObservableList<String> categories = FXCollections.observableArrayList();
+    protected static ObservableList<String> products = FXCollections.observableArrayList();
+    @Nullable
+    static String selectedItem, selectedCategory;
+    static int action;
+    public String query;
+    public Object source;
     @FXML
     private ListView<String> categoryList;
     @FXML
@@ -56,7 +68,6 @@ public class InventoryController implements Initializable, ControlledScreen {
     private Label addedOnLabel;
     @FXML
     private Label qtyAddedLabel;
-    @FXML
     private Label soldOnLabel;
     @FXML
     private Label qtySoldLabel;
@@ -64,27 +75,12 @@ public class InventoryController implements Initializable, ControlledScreen {
     private Label minPriceLabel;
     @FXML
     private Label stockLabel;
-
-    protected static final int ADDING = 1, MODIFYING = 2, FIRST = 1, SECOND = 2;
-
-    public static DatabaseHelper helper;
-    public String query;
-    static String selectedItem, selectedCategory;
     private String misc;
-    static int action;
-
-    public static InventoryManager manager;
     private MenuItemsListener menuItemsListener;
     private ScreensController screen;
-
-    protected static ObservableList<String> categories = FXCollections.observableArrayList();
-    protected static ObservableList<String> products = FXCollections.observableArrayList();
-
     private ArrayList<String> array;
     private ContextMenu categoryMenu, productMenu;
     private ArrayList<MenuItem> categoryItems, productItems;
-
-    public Object source;
 
     /**
      * Initializes the controller class.
@@ -145,7 +141,8 @@ public class InventoryController implements Initializable, ControlledScreen {
                     } catch (SQLException ex) {
                         Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });
+                }
+        );
 
         productList.setOnMouseClicked((MouseEvent event) -> {
             if (event.getButton().equals(MouseButton.SECONDARY) && !products.isEmpty()
@@ -174,9 +171,10 @@ public class InventoryController implements Initializable, ControlledScreen {
                         manager.getProductDetails();
                     } catch (SQLException ex) {
                         Logger.getLogger(InventoryController.class.getName()).
-                        log(Level.SEVERE, null, ex);
+                                log(Level.SEVERE, null, ex);
                     }
-                });
+                }
+        );
     }
 
     @FXML
@@ -200,6 +198,7 @@ public class InventoryController implements Initializable, ControlledScreen {
         } else {
             try {
                 manager.addQuantity();
+                SalesController.df.update();
             } catch (SQLException ex) {
                 Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -215,6 +214,7 @@ public class InventoryController implements Initializable, ControlledScreen {
         } else {
             try {
                 manager.reduceQuantity();
+                SalesController.df.update();
             } catch (SQLException ex) {
                 Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -228,6 +228,7 @@ public class InventoryController implements Initializable, ControlledScreen {
                     showInformation();
         } else {
             editSelectedProduct();
+            SalesController.df.update();
         }
 
     }
@@ -235,17 +236,21 @@ public class InventoryController implements Initializable, ControlledScreen {
     @FXML
     private void removeProduct(ActionEvent event) throws SQLException {
         if (categories.isEmpty()) {
-            Dialogs.create().title("Empty Inventory").
-                    message("There are no products in the inventory.").
+            //noinspection RedundantStringToString,RedundantStringToString
+            Dialogs.create().title("Empty Inventory").masthead("The Selected Product is " + productList.getSelectionModel().getSelectedItem().toString()).
+                    message("There are no products in the inventory." + productList.getSelectionModel().getSelectedItem().toString()).
                     showInformation();
+
         } else {
+
             manager.removeProduct();
+            SalesController.df.update();
         }
 
     }
 
     @FXML
-    private void search(KeyEvent event) {
+    private void search(@NotNull KeyEvent event) {
         //if a backspace is typed remove the last character from the arrayList
 
         //if the key typed is a backspace and the arraylist has some items
@@ -289,7 +294,7 @@ public class InventoryController implements Initializable, ControlledScreen {
                     productList.setItems(products);
                     manager.getProductDetails();
                 }
-            } catch (IllegalStateException | SQLException ex) {
+            } catch (@NotNull IllegalStateException | SQLException ex) {
                 Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -301,11 +306,28 @@ public class InventoryController implements Initializable, ControlledScreen {
         AddModifyController.modObject.modify();
         selectedCategory = manager.category;
         AddModifyController.modObject.fillComboBox();
+        SalesController.df.update();
         screen.setScreen(ADD_MODIFY_ID);
+    }
+
+    private void renameCategory() throws SQLException {
+
+        Optional<String> newName = Dialogs.create().title("Rename Category").
+                masthead("You are about to rename " + selectedCategory).
+                message("Enter the new name: ").showTextInput();
+
+        if (newName.isPresent()) {
+            query = "UPDATE PRODUCT SET CATEGORY = '" + toSentenceCase(newName.get())
+                    + "' WHERE CATEGORY = '" + selectedCategory + "'";
+            helper.setQuery(query);
+            manager.getAll();
+        }
+
     }
 
     protected final class InventoryManager {
 
+        @Nullable
         private String category, product;
 
         public InventoryManager() throws SQLException {
@@ -332,6 +354,7 @@ public class InventoryController implements Initializable, ControlledScreen {
             }
         }
 
+        @Nullable
         private String getProducts() throws SQLException {
             query = "SELECT * FROM PRODUCT WHERE CATEGORY = '" + category + "'";
             System.out.println(query);
@@ -355,6 +378,7 @@ public class InventoryController implements Initializable, ControlledScreen {
         }
 
         private void getProductDetails() throws SQLException {
+            Functions jj = new Functions();
             query = "SELECT * FROM PRODUCT WHERE NAME = '" + product + "'";
             //System.out.println(query);
             helper.setQuery(query);
@@ -376,10 +400,10 @@ public class InventoryController implements Initializable, ControlledScreen {
 
                 if (helper.resultSet.getString("LASTLY_SOLD_ON") != null) {//never == null a string
 
-                    soldOnLabel.setText(helper.resultSet.getString("LASTLY_SOLD_ON"));
+                    //  soldOnLabel.setText(jj.getAllDData("date(Date)", "SALES_DETAILED").get(0).toString());
                     qtySoldLabel.setText(helper.resultSet.getString("LAST_QUANTITY_SOLD"));
                 } else {
-                    soldOnLabel.setText("Not yet sold");
+                    //  soldOnLabel.setText("Not yet sold");
                     qtySoldLabel.setText("None");
                 }
             }
@@ -389,7 +413,7 @@ public class InventoryController implements Initializable, ControlledScreen {
             try {
                 int qty;
                 Optional<String> quantity = Dialogs.create().masthead("You are about "
-                        + "to manually reduce the quantity of a product.")
+                        + "to manually add the quantity of ." + selectedItem)
                         .message("Enter quantity: ").showTextInput();
                 if (quantity.isPresent()) {
                     qty = Integer.parseInt(quantity.get());
@@ -409,6 +433,7 @@ public class InventoryController implements Initializable, ControlledScreen {
                                 + "', QUANTITY_ADDED = " + qty + "WHERE NAME = '"
                                 + selectedItem + "'";
                         helper.setQuery(query);
+                        SalesController.df.update();
                         manager.getProductDetails();
                     }
                 }
@@ -441,6 +466,7 @@ public class InventoryController implements Initializable, ControlledScreen {
                                 + qty + "WHERE NAME = '"
                                 + selectedItem + "'";
                         helper.setQuery(query);
+                        SalesController.df.update();
                         manager.getProductDetails();
                     }
                 }
@@ -451,13 +477,14 @@ public class InventoryController implements Initializable, ControlledScreen {
         }
 
         private void removeProduct() throws SQLException {
-            Action response = Dialogs.create().title("Delete Product").
+            Action response = Dialogs.create().title("Delete Product").masthead(" Here is the Item you are Deleting " + selectedItem).
                     message("Are you sure you want to delete this product?").
                     actions(Dialog.Actions.YES, Dialog.Actions.NO).
                     showConfirm();
             if (response.equals(Dialog.Actions.YES)) {
                 query = "DELETE FROM PRODUCT WHERE NAME = '" + selectedItem + "'";
                 helper.setQuery(query);
+                SalesController.df.update();
                 manager.category = selectedCategory;
                 selectedItem = manager.getProducts();
                 manager.product = selectedItem;
@@ -476,30 +503,15 @@ public class InventoryController implements Initializable, ControlledScreen {
             stockLabel.setText("-");
             addedOnLabel.setText("-");
             qtyAddedLabel.setText("-");
-            soldOnLabel.setText("-");
+//            soldOnLabel.setText("-");
             qtySoldLabel.setText("-");
         }
-    }
-
-    private void renameCategory() throws SQLException {
-
-        Optional<String> newName = Dialogs.create().title("Rename Category").
-                masthead("You are about to rename " + selectedCategory).
-                message("Enter the new name: ").showTextInput();
-
-        if (newName.isPresent()) {
-            query = "UPDATE PRODUCT SET CATEGORY = '" + toSentenceCase(newName.get())
-                    + "' WHERE CATEGORY = '" + selectedCategory + "'";
-            helper.setQuery(query);
-            manager.getAll();
-        }
-
     }
 
     private class MenuItemsListener implements EventHandler<ActionEvent> {
 
         @Override
-        public void handle(ActionEvent event) {
+        public void handle(@NotNull ActionEvent event) {
             if (event.getSource().equals(categoryMenu.getItems().get(0))) {//Rename
                 try {
                     renameCategory();
@@ -520,6 +532,7 @@ public class InventoryController implements Initializable, ControlledScreen {
                                 + selectedCategory + "'";
                         System.out.println(query);
                         helper.setQuery(query);
+                        SalesController.df.update();
                         manager.getAll();
                     } catch (SQLException ex) {
                         Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
@@ -529,6 +542,7 @@ public class InventoryController implements Initializable, ControlledScreen {
             } else if (event.getSource().equals(productMenu.getItems().get(0))) {//Edit
                 try {
                     editSelectedProduct();
+                    SalesController.df.update();
                 } catch (SQLException ex) {
                     Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -536,6 +550,7 @@ public class InventoryController implements Initializable, ControlledScreen {
             } else if (event.getSource().equals(productMenu.getItems().get(1))) {//Remove
                 try {
                     manager.removeProduct();
+                    SalesController.df.update();
                 } catch (SQLException ex) {
                     Logger.getLogger(InventoryController.class.getName()).log(Level.SEVERE, null, ex);
                 }

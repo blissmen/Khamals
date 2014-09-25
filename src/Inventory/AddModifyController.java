@@ -64,9 +64,11 @@ public class AddModifyController implements Initializable, ControlledScreen {
     private int cost;
     private int minPrice;
     private int quantity;
+    private int quantity1;
     private String query;
     private String prevName;
     private ScreensController screen;
+    int Def=0;
 
     @NotNull
     public static String toSentenceCase(@NotNull String string) {
@@ -137,7 +139,10 @@ public class AddModifyController implements Initializable, ControlledScreen {
             cost = Integer.parseInt(costField.getText());
             minPrice = Integer.parseInt(minPriceField.getText());
 
-                quantity = Integer.parseInt(qtyField.getText());
+                 quantity = Integer.parseInt(qtyField.getText());
+            if (action == ADDING) {
+                //read the quantity of adding a new product
+           
                 Calendar calendar = Calendar.getInstance();
                 Timestamp timestamp = new Timestamp(calendar.getTimeInMillis());
                 Formatter orm = new Formatter();
@@ -154,7 +159,20 @@ public class AddModifyController implements Initializable, ControlledScreen {
                         + minPrice + ", "
                         + "'" + date + "', "
                         + quantity + ")";
-            } catch (@NotNull NumberFormatException | StringIndexOutOfBoundsException e) {
+            } else {
+                 quantity1= quantity-Def;
+                query = "UPDATE PRODUCT SET CODE = '" + code + "', "
+                        + "NAME = '" + name + "', "
+                        + "CATEGORY = '" + newCategory + "', "
+                        + "DESCRIPTION = '" + desc + "', "
+                        + "COST_PRICE = " + cost + ", "
+                        + "MIN_SELLING_PRICE = " + minPrice
+                        + ",QUANTITY_ADDED = " + quantity1
+                        + ",QUANTITY_AVAILABLE = " + quantity
+                        + " WHERE NAME = '" + (prevName.equals(name)
+                        ? name : prevName) + "'";
+            }
+        } catch (@NotNull NumberFormatException | StringIndexOutOfBoundsException e) {
             Dialogs.create().title("Empty fields").
                     masthead("Optional field - Description").
                     message("Please fill in all the required fields").showError();
@@ -257,6 +275,8 @@ public class AddModifyController implements Initializable, ControlledScreen {
                         + "MIN_SELLING_PRICE, QUANTITY_AVAILABLE "
                         + "FROM PRODUCT WHERE NAME = '" + selectedItem + "'";
                 helper.setQuery(query);
+                
+               Def = Integer.parseInt(helper.resultSet.getString("QUANTITY_AVAILABLE"));
                 nameField.setText(helper.resultSet.getString("NAME"));
                 productCode.setText(helper.resultSet.getString("CODE"));
                 description.setText(helper.resultSet.getString("DESCRIPTION"));
@@ -264,6 +284,7 @@ public class AddModifyController implements Initializable, ControlledScreen {
                 minPriceField.setText(helper.resultSet.getString("MIN_SELLING_PRICE"));
                 qtyField.setText(helper.resultSet.getString("QUANTITY_AVAILABLE"));
                // qtyField.setEditable(false);
+                
                 prevName = nameField.getText();
             } catch (SQLException ex) {
                 Logger.getLogger(AddModifyController.class.getName()).log(Level.SEVERE, null, ex);
