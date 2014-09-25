@@ -1,70 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
+
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-
-<AnchorPane prefHeight="595.0" prefWidth="1061.0" style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.FXMLDocumentController">
-   <children>
-      <AnchorPane layoutX="291.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="336.0" prefWidth="480.0" style="-fx-background-color: white;" stylesheets="@../khamals/customeStyleSheet.css">
-         <children>
-            <Label layoutX="24.0" layoutY="8.0" text="Login">
-               <font>
-                  <Font name="Vani" size="14.0" />
-               </font>
-            </Label>
-            <Label layoutX="42.0" layoutY="59.0" text="Username:">
-               <font>
-                  <Font name="Vani Bold" size="16.0" />
-               </font>
-            </Label>
-            <TextField fx:id="username" layoutX="145.0" layoutY="64.0" prefHeight="25.0" prefWidth="307.0" />
-            <Label layoutX="42.0" layoutY="94.0" text="Password:">
-               <font>
-                  <Font name="Vani Bold" size="16.0" />
-               </font>
-            </Label>
-            <Group fx:id="radioBtnGrp">
-               <children>
-                  <RadioButton fx:id="temp" layoutX="133.0" layoutY="145.0" mnemonicParsing="false" selected="true" text="Temporal Login" />
-                  <RadioButton fx:id="perm" layoutX="266.0" layoutY="145.0" mnemonicParsing="false" text="Permanent Login" />
-               </children>
-            </Group>
-            <Group>
-               <children>
-                  <Button id="iphone" fx:id="login" layoutX="170.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#handl" prefHeight="27.0" prefWidth="70.0" stylesheets="@../khamals/customeStyleSheet.css" text="Login">
-                     <font>
-                        <Font name="Vani Bold" size="13.0" />
-                     </font>
-                  </Button>
-                  <Button id="iphone" fx:id="cancel" layoutX="267.0" layoutY="182.0" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="27.0" prefWidth="66.0" stylesheets="@../khamals/customeStyleSheet.css" text="Cancel">
-                     <font>
-                        <Font name="Vani Bold" size="13.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Group>
-            <Label layoutX="24.0" layoutY="236.0" text="NOTE">
-               <font>
-                  <Font name="Vani Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label layoutX="42.0" layoutY="265.0" text="- Selecting Temporal Login keeps you logged in for 10mins">
-               <font>
-                  <Font name="Vani Bold" size="12.0" />
-               </font>
-            </Label>
-            <Label layoutX="42.0" layoutY="292.0" text="- Selecting Permanent Login keeps you logged in for 3 hours">
-               <font>
-                  <Font name="Vani Bold" size="12.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="pwd" layoutX="145.0" layoutY="99.0" prefHeight="25.0" prefWidth="307.0" />
-         </children>
-      </AnchorPane>
-   </children>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="595.0"
+            prefWidth="1061.0"
+            style="-fx-background-color: #000000,        linear-gradient(#7ebcea, #2f4b8f),        linear-gradient(#426ab7, #263e75),        linear-gradient(#395cab, #223768);"
+            xmlns="http://javafx.com/javafx/8"
+            fx:controller="Login.FXMLDocumentController">
+    <children>
+        <AnchorPane layoutX="291.0" layoutY="130.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                    minWidth="-Infinity" prefHeight="336.0" prefWidth="480.0" style="-fx-background-color: white;"
+                    stylesheets="@../khamals/customeStyleSheet.css">
+            <children>
+                <Label layoutX="24.0" layoutY="8.0" text="Login">
+                    <font>
+                        <Font name="Vani" size="14.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="42.0" layoutY="59.0" text="Username:">
+                    <font>
+                        <Font name="Vani Bold" size="16.0"/>
+                    </font>
+                </Label>
+                <TextField fx:id="username" layoutX="145.0" layoutY="64.0" prefHeight="25.0" prefWidth="307.0"/>
+                <Label layoutX="42.0" layoutY="94.0" text="Password:">
+                    <font>
+                        <Font name="Vani Bold" size="16.0"/>
+                    </font>
+                </Label>
+                <Group fx:id="radioBtnGrp">
+                    <children>
+                        <RadioButton fx:id="temp" layoutX="133.0" layoutY="145.0" mnemonicParsing="false"
+                                     selected="true" text="Temporal Login"/>
+                        <RadioButton fx:id="perm" layoutX="266.0" layoutY="145.0" mnemonicParsing="false"
+                                     text="Permanent Login"/>
+                    </children>
+                </Group>
+                <Group>
+                    <children>
+                        <Button id="iphone" fx:id="login" layoutX="170.0" layoutY="182.0" mnemonicParsing="false"
+                                onMouseClicked="#handl" prefHeight="27.0" prefWidth="70.0"
+                                stylesheets="@../khamals/customeStyleSheet.css" text="Login">
+                            <font>
+                                <Font name="Vani Bold" size="13.0"/>
+                            </font>
+                        </Button>
+                        <Button id="iphone" fx:id="cancel" layoutX="267.0" layoutY="182.0" mnemonicParsing="false"
+                                onMouseClicked="#cancel" prefHeight="27.0" prefWidth="66.0"
+                                stylesheets="@../khamals/customeStyleSheet.css" text="Cancel">
+                            <font>
+                                <Font name="Vani Bold" size="13.0"/>
+                            </font>
+                        </Button>
+                    </children>
+                </Group>
+                <Label layoutX="24.0" layoutY="236.0" text="NOTE">
+                    <font>
+                        <Font name="Vani Bold" size="13.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="42.0" layoutY="265.0" text="- Selecting Temporal Login keeps you logged in for 10mins">
+                    <font>
+                        <Font name="Vani Bold" size="12.0"/>
+                    </font>
+                </Label>
+                <Label layoutX="42.0" layoutY="292.0"
+                       text="- Selecting Permanent Login keeps you logged in for 3 hours">
+                    <font>
+                        <Font name="Vani Bold" size="12.0"/>
+                    </font>
+                </Label>
+                <PasswordField fx:id="pwd" layoutX="145.0" layoutY="99.0" prefHeight="25.0" prefWidth="307.0"/>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>
